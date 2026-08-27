@@ -59,6 +59,15 @@ const DoctorDashboard = () => {
   // Dummy earnings calc for now (assume 500 per completed)
   const earnings = completedCount * 500;
 
+  const isAppointmentLive = (dateStr, timeStr) => {
+    if (!dateStr || !timeStr) return false;
+    const aptDate = new Date(dateStr);
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    aptDate.setHours(hours, minutes, 0, 0);
+    const diffMins = (new Date() - aptDate) / (1000 * 60);
+    return diffMins >= 0 && diffMins <= 10;
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen pb-16">
       {/* Header */}

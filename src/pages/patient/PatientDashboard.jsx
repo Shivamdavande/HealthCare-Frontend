@@ -112,6 +112,15 @@ const PatientDashboard = () => {
   const upcoming = appointments.filter(a => a.status === 'BOOKED' || a.status === 'ACCEPTED' || a.status === 'PENDING_PAYMENT');
   const past = appointments.filter(a => a.status === 'COMPLETED' || a.status === 'REJECTED' || a.status === 'CANCELLED');
 
+  const isAppointmentLive = (dateStr, timeStr) => {
+    if (!dateStr || !timeStr) return false;
+    const aptDate = new Date(dateStr);
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    aptDate.setHours(hours, minutes, 0, 0);
+    const diffMins = (new Date() - aptDate) / (1000 * 60);
+    return diffMins >= 0 && diffMins <= 10;
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen pb-16">
       
