@@ -60,12 +60,8 @@ const DoctorDashboard = () => {
   const earnings = completedCount * 500;
 
   const isAppointmentLive = (dateStr, timeStr) => {
-    if (!dateStr || !timeStr) return false;
-    const aptDate = new Date(dateStr);
-    const [hours, minutes] = timeStr.split(':').map(Number);
-    aptDate.setHours(hours, minutes, 0, 0);
-    const diffMins = (new Date() - aptDate) / (1000 * 60);
-    return diffMins >= 0 && diffMins <= 10;
+    // Keeping buttons always active for now as requested
+    return true;
   };
 
   return (
