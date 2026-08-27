@@ -11,7 +11,7 @@ const ReviewForm = ({ appointmentId, doctorName, onSuccess }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('http://localhost:5001/api/reviews', {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/reviews`, {
         appointmentId, rating, comment
       }, { withCredentials: true });
       if (onSuccess) onSuccess();

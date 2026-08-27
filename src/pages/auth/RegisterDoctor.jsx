@@ -20,7 +20,7 @@ const RegisterDoctor = () => {
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
-        const res = await axios.get('http://localhost:5001/api/departments');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/departments`);
         setDepartments(res.data);
       } catch (err) {
         console.error('Failed to fetch departments');
@@ -44,7 +44,7 @@ const RegisterDoctor = () => {
     setError('');
     
     try {
-      const res = await axios.post('http://localhost:5001/api/auth/register/doctor', formData, { withCredentials: true });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/auth/register/doctor`, formData, { withCredentials: true });
       localStorage.setItem('user', JSON.stringify(res.data));
       window.dispatchEvent(new Event('storage'));
       navigate('/doctor/dashboard');

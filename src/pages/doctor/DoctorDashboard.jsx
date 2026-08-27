@@ -10,7 +10,7 @@ const DoctorDashboard = () => {
 
   const fetchAppointments = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5001/api/appointments/doctor', {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/appointments/doctor`, {
         withCredentials: true
       });
       setAppointments(data);
@@ -27,7 +27,7 @@ const DoctorDashboard = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.patch(`http://localhost:5001/api/appointments/${id}/status`, { status }, {
+      await axios.patch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/appointments/${id}/status`, { status }, {
         withCredentials: true
       });
       fetchAppointments();

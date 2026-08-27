@@ -21,7 +21,7 @@ const AppointmentWizard = () => {
     try {
       const fee = consultationType === 'Chat' ? state.fees?.chat || 499 : state.fees?.video || 799;
       
-      const res = await axios.post('http://localhost:5001/api/appointments', {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/appointments`, {
         doctor: state.doctorId,
         department: state.departmentId,
         date,

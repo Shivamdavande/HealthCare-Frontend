@@ -14,8 +14,8 @@ const AdminDashboard = () => {
       setLoading(true);
       try {
         const [docsRes, deptsRes] = await Promise.all([
-          axios.get('http://localhost:5001/api/doctors/admin/all', { withCredentials: true }),
-          axios.get('http://localhost:5001/api/departments')
+          axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/doctors/admin/all`, { withCredentials: true }),
+          axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/departments`)
         ]);
         setDoctors(docsRes.data);
         setDepartments(deptsRes.data);
@@ -30,7 +30,7 @@ const AdminDashboard = () => {
 
   const handleVerifyDoctor = async (doctorId, status) => {
     try {
-      await axios.patch(`http://localhost:5001/api/doctors/${doctorId}/verify`, { status }, { withCredentials: true });
+      await axios.patch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/doctors/${doctorId}/verify`, { status }, { withCredentials: true });
       // Update local state
       setDoctors(doctors.map(d => d._id === doctorId ? { ...d, verificationStatus: status } : d));
     } catch (err) {

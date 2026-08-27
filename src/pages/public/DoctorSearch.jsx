@@ -25,7 +25,7 @@ const DoctorSearch = () => {
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
-        const res = await axios.get('http://localhost:5001/api/departments');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/departments`);
         setDepartments(res.data);
       } catch (err) {
         console.error(err);
@@ -39,7 +39,7 @@ const DoctorSearch = () => {
     const fetchDoctors = async () => {
       setLoading(true);
       try {
-        let url = 'http://localhost:5001/api/doctors?';
+        let url = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/doctors?`;
         if (deptId) url += `department=${deptId}&`;
         if (debouncedSearch) url += `search=${debouncedSearch}&`;
         

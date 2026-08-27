@@ -21,7 +21,7 @@ const AvailabilityManager = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5001/api/availability', {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/availability`, {
         dayOfWeek, isAvailable, startTime, endTime, slotDuration
       }, { withCredentials: true });
       setMessage('Availability updated successfully!');

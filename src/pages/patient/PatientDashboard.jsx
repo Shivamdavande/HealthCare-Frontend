@@ -10,7 +10,7 @@ const PatientDashboard = () => {
 
   const fetchAppointments = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5001/api/appointments/my', {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/appointments/my`, {
         withCredentials: true
       });
       setAppointments(data);
@@ -28,7 +28,7 @@ const PatientDashboard = () => {
   const cancelAppointment = async (id) => {
     if (!window.confirm("Are you sure you want to cancel this appointment?")) return;
     try {
-      await axios.patch(`http://localhost:5001/api/appointments/${id}/status`, { status: 'CANCELLED' }, {
+      await axios.patch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/appointments/${id}/status`, { status: 'CANCELLED' }, {
         withCredentials: true
       });
       fetchAppointments();
@@ -54,7 +54,7 @@ const PatientDashboard = () => {
   const submitReview = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5001/api/reviews', {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/reviews`, {
         appointmentId: reviewAppt._id,
         rating,
         comment

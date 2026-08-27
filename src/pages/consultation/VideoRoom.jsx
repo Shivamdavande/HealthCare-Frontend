@@ -15,7 +15,7 @@ const VideoRoom = () => {
     // Fetch appointment details to get room name and user info
     const fetchAppointment = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5001/api/appointments/${id}`, {
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/appointments/${id}`, {
           withCredentials: true
         });
         setAppointment(data);

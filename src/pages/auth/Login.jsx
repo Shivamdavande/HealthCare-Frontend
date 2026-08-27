@@ -16,7 +16,7 @@ const Login = () => {
     setError('');
     
     try {
-      const res = await axios.post('http://localhost:5001/api/auth/login', { email, password }, { withCredentials: true });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/auth/login`, { email, password }, { withCredentials: true });
       localStorage.setItem('user', JSON.stringify(res.data));
       window.dispatchEvent(new Event('storage')); // Trigger update for navbar
       

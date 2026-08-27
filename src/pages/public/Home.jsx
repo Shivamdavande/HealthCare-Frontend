@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Video, MessageSquare, Clock, ShieldCheck, Activity, Brain, Baby, Heart } from 'lucide-react';
 
+import heroDoctorImg from '../../assets/hero_doctor.jpg';
+
 const Home = () => {
   return (
     <div>
@@ -39,7 +41,7 @@ const Home = () => {
               {/* Refined editorial image rather than a generic blob */}
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                  src={heroDoctorImg} 
                   alt="Doctor consulting with patient" 
                   className="w-full h-[500px] object-cover"
                 />

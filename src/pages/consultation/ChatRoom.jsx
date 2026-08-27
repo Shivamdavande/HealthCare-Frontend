@@ -30,10 +30,10 @@ const ChatRoom = () => {
 
     const fetchAppointmentDetails = async () => {
       try {
-        const { data: aptData } = await axios.get(`http://localhost:5001/api/appointments/${id}`, { withCredentials: true });
+        const { data: aptData } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/appointments/${id}`, { withCredentials: true });
         setAppointment(aptData);
         
-        const { data: msgData } = await axios.get(`http://localhost:5001/api/appointments/${id}/messages`, { withCredentials: true });
+        const { data: msgData } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/appointments/${id}/messages`, { withCredentials: true });
         setMessages(msgData);
       } catch (err) {
         console.error('Failed to fetch data', err);
@@ -49,7 +49,7 @@ const ChatRoom = () => {
     if (!currentUser) return;
 
     // Connect socket
-    const newSocket = io('http://localhost:5001', {
+    const newSocket = io(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}`, {
       withCredentials: true,
       // If server expects token in auth
       auth: {
@@ -90,7 +90,7 @@ const ChatRoom = () => {
 
   const handleCompleteChat = async () => {
     try {
-      const { data } = await axios.patch(`http://localhost:5001/api/appointments/${id}/complete-chat`, {}, { withCredentials: true });
+      const { data } = await axios.patch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/appointments/${id}/complete-chat`, {}, { withCredentials: true });
       setAppointment(data);
     } catch (err) {
       console.error(err);

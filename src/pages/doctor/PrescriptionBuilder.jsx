@@ -36,7 +36,7 @@ const PrescriptionBuilder = () => {
     setIsSubmitting(true);
     
     try {
-      await axios.post('http://localhost:5001/api/prescriptions', {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/prescriptions`, {
         appointmentId: id,
         diagnosis,
         medicines,

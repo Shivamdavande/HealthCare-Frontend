@@ -21,7 +21,7 @@ const ChatInterface = ({ appointmentId, currentUser }) => {
     // However, Socket.io auth payload is often safer if we extract the token.
     // For this boilerplate, we'll setup socket with credentials.
     
-    socketRef.current = io('http://localhost:5001', {
+    socketRef.current = io(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}`, {
       withCredentials: true,
       // auth: { token: 'YOUR_TOKEN_HERE' } // Ideal way if token is accessible
     });
