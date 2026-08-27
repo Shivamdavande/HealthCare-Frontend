@@ -174,14 +174,20 @@ const DoctorDashboard = () => {
                     
                     {apt.status === 'ACCEPTED' && (
                       <>
-                        {apt.consultationType === 'Video' ? (
-                          <Link to={`/consultation/video/${apt._id}`} className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center flex-1 lg:flex-none justify-center">
-                            <Video className="w-4 h-4 mr-2" /> Join Video
-                          </Link>
+                        {isAppointmentLive(apt.date, apt.timeSlot) ? (
+                          apt.consultationType === 'Video' ? (
+                            <Link to={`/consultation/video/${apt._id}`} className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center flex-1 lg:flex-none justify-center">
+                              <Video className="w-4 h-4 mr-2" /> Join Video
+                            </Link>
+                          ) : (
+                            <Link to={`/consultation/chat/${apt._id}`} className="bg-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-700 transition-colors flex items-center flex-1 lg:flex-none justify-center">
+                              <MessageSquare className="w-4 h-4 mr-2" /> Open Chat
+                            </Link>
+                          )
                         ) : (
-                          <Link to={`/consultation/chat/${apt._id}`} className="bg-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-700 transition-colors flex items-center flex-1 lg:flex-none justify-center">
-                            <MessageSquare className="w-4 h-4 mr-2" /> Open Chat
-                          </Link>
+                          <button disabled className="bg-slate-300 text-slate-500 px-4 py-2 rounded-lg font-medium cursor-not-allowed flex items-center flex-1 lg:flex-none justify-center" title="Link active only for 10 mins starting from appointment time">
+                            {apt.consultationType === 'Video' ? <><Video className="w-4 h-4 mr-2" /> Join Video</> : <><MessageSquare className="w-4 h-4 mr-2" /> Open Chat</>}
+                          </button>
                         )}
                         <Link to={`/doctor/prescription/${apt._id}`} className="bg-primary-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors flex items-center flex-1 lg:flex-none justify-center">
                           <FileText className="w-4 h-4 mr-2" /> Prescribe & Complete

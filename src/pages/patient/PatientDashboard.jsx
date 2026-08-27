@@ -177,9 +177,15 @@ const PatientDashboard = () => {
                     
                     <div className="flex space-x-3">
                       {apt.status === 'ACCEPTED' && (
-                        <Link to={`/consultation/${apt.consultationType === 'Video' ? 'video' : 'chat'}/${apt._id}`} className="bg-slate-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-                          {apt.consultationType === 'Video' ? 'Join Call' : 'Open Chat'}
-                        </Link>
+                        isAppointmentLive(apt.date, apt.timeSlot) ? (
+                          <Link to={`/consultation/${apt.consultationType === 'Video' ? 'video' : 'chat'}/${apt._id}`} className="bg-slate-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
+                            {apt.consultationType === 'Video' ? 'Join Call' : 'Open Chat'}
+                          </Link>
+                        ) : (
+                          <button disabled className="bg-slate-300 text-slate-500 px-5 py-2 rounded-lg text-sm font-medium cursor-not-allowed" title="Link active only for 10 mins starting from appointment time">
+                            {apt.consultationType === 'Video' ? 'Join Call' : 'Open Chat'}
+                          </button>
+                        )
                       )}
                       <button onClick={() => cancelAppointment(apt._id)} className="text-slate-400 hover:text-red-500 text-sm font-medium px-2 py-2 transition-colors">
                         Cancel
